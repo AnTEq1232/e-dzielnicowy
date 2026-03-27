@@ -1,5 +1,5 @@
 <?php
-include "config.php"; // config.php już obsługuje sesję i połączenie z DB
+include "config.php"; // config.php już obsługuje sesję i połączenie z DBa
 
 // Sprawdzenie, czy użytkownik jest zalogowany
 if(!isset($_SESSION['user_id'])){
