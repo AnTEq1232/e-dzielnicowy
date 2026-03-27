@@ -44,6 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if($stmt->execute()){
         echo "<p>Zgłoszenie dodane pomyślnie!</p>";
+        header("Location: my_profile.php");
     } else {
         echo "Błąd: " . $stmt->error;
     }
@@ -73,7 +74,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <button type="submit">Dodaj zgłoszenie</button>
 </form>
 
-<a href="my_reports.php">Moje zgłoszenia</a> | <a href="logout.php">Wyloguj</a>
+<a href="my_profil.php">Profil</a> | <a href="logout.php">Wyloguj</a>
 
 </body>
 </html>
