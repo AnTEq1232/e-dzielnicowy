@@ -1,18 +1,18 @@
 <?php
-include "config.php";
+include "config.php"; // teraz uruchamia sesję tylko jeśli jeszcze nie działa
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = $_POST["user_name"];
     $password = password_hash($_POST["user_password"], PASSWORD_DEFAULT);
-
-    // pobranie IP użytkownika
     $ip = $_SERVER['REMOTE_ADDR'];
 
-    // przygotowane zapytanie
     $stmt = $conn->prepare("INSERT INTO Users (username, password, ip_address) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $username, $password, $ip);
 
     if($stmt->execute()){
+        // automatyczne logowanie
+        $_SESSION['user_id'] = $stmt->insert_id;
+        $_SESSION['username'] = $username;
         header("Location: index.php");
         exit();
     } else {
