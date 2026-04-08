@@ -1,6 +1,7 @@
 <?php
-session_start();
-include "config.php";
+// Handle form and session at top
+if (session_status() == PHP_SESSION_NONE) session_start();
+require_once 'config.php';
 
 // Sprawdzenie, czy użytkownik zalogowany
 if(!isset($_SESSION['user_id'])){
@@ -34,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
             $stmt_attach->close();
         } else {
-            echo "Błąd przy przesyłaniu pliku.";
+            $upload_error = "Błąd przy przesyłaniu pliku.";
         }
     }
 
@@ -43,38 +44,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $stmt->bind_param("ssssssi", $title, $description, $category, $location, $event_date, $attachment_id, $user_id);
 
     if($stmt->execute()){
-        echo "<p>Zgłoszenie dodane pomyślnie!</p>";
         header("Location: my_profile.php");
+        exit();
     } else {
-        echo "Błąd: " . $stmt->error;
+        $form_error = "Błąd: " . $stmt->error;
     }
 
     $stmt->close();
     $conn->close();
 }
+
+$page_title = 'Dodaj zgłoszenie - eDzielnicowy';
+require_once 'header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Dodaj zgłoszenie - eDzielnicowy</title>
-</head>
-<body>
+<div class="welcome" style="max-width:700px; margin:0 auto;">
+    <h2>Dodaj zgłoszenie</h2>
 
-<h2>Dodaj zgłoszenie</h2>
+    <?php if(!empty($upload_error)): ?><div class="error"><?= htmlspecialchars($upload_error) ?></div><?php endif; ?>
+    <?php if(!empty($form_error)): ?><div class="error"><?= htmlspecialchars($form_error) ?></div><?php endif; ?>
 
-<form method="post" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Tytuł" required><br><br>
-    <textarea name="description" placeholder="Opis zdarzenia" required></textarea><br><br>
-    <input type="text" name="category" placeholder="Kategoria" required><br><br>
-    <input type="text" name="location" placeholder="Lokalizacja" required><br><br>
-    <input type="date" name="event_date" required><br><br>
-    <input type="file" name="attachment"><br><br>
-    <button type="submit">Dodaj zgłoszenie</button>
-</form>
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Tytuł" required>
 
-<a href="my_profil.php">Profil</a> | <a href="logout.php">Wyloguj</a>
+        <textarea name="description" placeholder="Opis zdarzenia" required></textarea>
 
-</body>
-</html>
+        <input type="text" name="category" placeholder="Kategoria" required>
+
+        <input type="text" name="location" placeholder="Lokalizacja" required>
+
+        <input type="date" name="event_date" required>
+
+        <input type="file" name="attachment">
+
+        <button type="submit" class="button">Dodaj zgłoszenie</button>
+    </form>
+
+    <div class="links" style="margin-top:12px;">
+        <a href="my_profile.php">Profil</a>
+        <a href="logout.php">Wyloguj</a>
+    </div>
+</div>
+
+<?php require_once 'footer.php'; ?>

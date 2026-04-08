@@ -1,0 +1,61 @@
+/* Unified styles for eDzielnicowy frontend */
+
+* { box-sizing: border-box; }
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	margin: 0;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+	color: #2c3e50;
+}
+
+header { background: rgba(44, 62, 80, 0.95); color: #fff; padding: 15px 20px; backdrop-filter: blur(8px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+header h1 { margin: 0; font-size: 24px; }
+
+nav { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 12px 20px; display: flex; gap: 10px; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.2); }
+nav a { color: #2c3e50; text-decoration: none; font-weight: bold; padding: 8px 14px; border-radius: 8px; transition: 0.2s; background: rgba(255,255,255,0.6); }
+nav a:hover { background: linear-gradient(135deg, #2980b9, #3498db); color: white; transform: translateY(-1px); box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+
+.container { padding: 30px; animation: fadeIn 0.8s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.welcome { background: rgba(255,255,255,0.95); padding: 25px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); backdrop-filter: blur(8px); }
+.welcome h2 { margin-top: 0; color: #2c3e50; }
+
+.button, .back-btn { display: inline-block; padding: 12px 18px; background: linear-gradient(135deg, #2980b9, #3498db); color: #fff; text-decoration: none; border-radius: 8px; margin-right: 10px; font-weight: bold; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.button:hover, .back-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+.button:active, .back-btn:active { transform: translateY(0); box-shadow: none; }
+
+/* Forms */
+form input[type="text"], form input[type="password"], form input[type="date"], form input[type="file"], form textarea {
+	width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; transition: 0.2s; background: #fff;
+}
+form input:focus, form textarea:focus { outline: none; border-color: #3498db; box-shadow: 0 0 0 3px rgba(52,152,219,0.12); }
+
+button, input[type="submit"] { background: linear-gradient(135deg, #2980b9, #3498db); color: white; border: none; cursor: pointer; font-weight: bold; letter-spacing: 0.5px; padding: 12px; border-radius: 8px; transition: 0.2s; }
+button:hover, input[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+button:active, input[type="submit"]:active { transform: translateY(0px); box-shadow: none; }
+
+/* Tables */
+.data-section { margin-top: 24px; background: rgba(255,255,255,0.95); padding: 18px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+table.data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+table.data-table th, table.data-table td { padding: 10px 12px; border-bottom: 1px solid #e6eef7; text-align: left; }
+table.data-table th { background: linear-gradient(90deg,#f4f9ff,#eef7ff); color: #2c3e50; font-weight: 600; }
+
+.muted { color: #666; font-size: 0.95em; }
+
+/* Profile and listings */
+.profile-table, table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.profile-table th, table th { background:#2980b9; color:#fff; padding:10px; }
+.report-img { max-width:100px; max-height:100px; }
+
+/* Small utilities */
+.error { color:#e74c3c; font-weight:bold; }
+
+/* Responsive */
+@media (max-width: 600px) {
+	nav { padding: 10px; }
+	.container { padding: 16px; }
+}
+

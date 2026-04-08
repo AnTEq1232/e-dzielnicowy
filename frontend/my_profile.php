@@ -31,41 +31,10 @@ $stmt_reports->execute();
 $result_reports = $stmt_reports->get_result();
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Profil użytkownika - eDzielnicowy</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f9; margin:0; padding:0; }
-        header { background: #2c3e50; color: #fff; padding: 15px 20px; }
-        header h1 { margin:0; font-size:24px; }
-        nav { background: #34495e; padding: 10px 20px; }
-        nav a { color:#fff; text-decoration:none; margin-right:15px; font-weight:bold; }
-        nav a:hover { text-decoration:underline; }
-        .container { padding:20px; }
-        table { width:100%; border-collapse: collapse; margin-top:20px; }
-        table, th, td { border:1px solid #ccc; }
-        th, td { padding:10px; text-align:left; }
-        th { background:#2980b9; color:#fff; }
-        .button { display:inline-block; padding:10px 15px; background:#2980b9; color:#fff; text-decoration:none; border-radius:4px; margin-top:10px; }
-        .button:hover { background:#3498db; }
-        img.report-img { max-width:100px; max-height:100px; }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>eDzielnicowy - Profil użytkownika</h1>
-</header>
-
-<nav>
-    <a href="index.php">Strona główna</a>
-    <a href="add_report.php">Dodaj zgłoszenie</a>
-    <a href="logout.php">Wyloguj</a>
-</nav>
-
-<div class="container">
+<?php
+$page_title = 'Profil użytkownika - eDzielnicowy';
+require_once 'header.php';
+?>
     <h2>Twój profil</h2>
     <p><strong>Login:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
     <p><strong>IP rejestracji:</strong> <?php echo htmlspecialchars($user['ip_address']); ?></p>
@@ -103,12 +72,8 @@ $result_reports = $stmt_reports->get_result();
         <p>Nie dodałeś jeszcze żadnych zgłoszeń.</p>
     <?php endif; ?>
 
-</div>
-
-</body>
-</html>
-
 <?php
 $stmt_reports->close();
 $conn->close();
+require_once 'footer.php';
 ?>
